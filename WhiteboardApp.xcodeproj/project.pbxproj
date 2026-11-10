@@ -1,0 +1,691 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19538D0C30180E9700125DCD /* RailtracksSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19538D0B30180E9700125DCD /* RailtracksSwift */; };
+		19538D0E30180EAC00125DCD /* RailtracksSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 19538D0D30180EAC00125DCD /* RailtracksSwift */; };
+		19538F0130180F0100125DCD /* RailtownLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 19538F0230180F0200125DCD /* RailtownLogger */; };
+		19538F0330180F0300125DCD /* RailtownLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 19538F0430180F0400125DCD /* RailtownLogger */; };
+		444FC786301402B3002D3D57 /* WhiteboardCore in Frameworks */ = {isa = PBXBuildFile; productRef = 444FC785301402B3002D3D57 /* WhiteboardCore */; };
+		444FC7883014049F002D3D57 /* WhiteboardCore in Frameworks */ = {isa = PBXBuildFile; productRef = 444FC7873014049F002D3D57 /* WhiteboardCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		444FC7513013D9F6002D3D57 /* WhiteboardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhiteboardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		444FC7633014000B002D3D57 /* WhiteboardMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhiteboardMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		444FC77F30140158002D3D57 /* Exceptions for "WhiteboardApp" folder in "WhiteboardApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				macOS/Assets.xcassets,
+				macOS/Features/Components/AttendeeChip/WBMacOSAttendeeChipView.swift,
+				macOS/Features/Components/AttendeeChip/WBMacOSAttendeeChipViewModel.swift,
+				"macOS/Features/Components/Date+WBMacOS.swift",
+				macOS/Features/Components/ImageView/WBMacOSWhiteboardImageView.swift,
+				macOS/Features/Components/ImageView/WBMacOSWhiteboardImageViewModel.swift,
+				macOS/Features/Components/WBMacOSMeetingCardView.swift,
+				macOS/Features/Detail/WBMacOSActionItemPromptView.swift,
+				macOS/Features/Detail/WBMacOSActionItemsSectionView.swift,
+				macOS/Features/Detail/WBMacOSActionItemsSectionViewModel.swift,
+				macOS/Features/Detail/WBMacOSWhiteboardDetailView.swift,
+				macOS/Features/Detail/WBMacOSWhiteboardDetailViewModel.swift,
+				macOS/Features/Home/WBMacOSHomeView.swift,
+				macOS/Features/Home/WBMacOSHomeViewModel.swift,
+				macOS/Features/Schedule/WBMacOSScheduleView.swift,
+				macOS/Features/Schedule/WBMacOSScheduleViewModel.swift,
+				macOS/Features/Settings/WBMacOSSettingsView.swift,
+				macOS/Features/Settings/WBMacOSSettingsViewModel.swift,
+				macOS/Features/Sidebar/WBMacOSSidebarItem.swift,
+				macOS/Features/Sidebar/WBMacOSSidebarView.swift,
+				macOS/Features/Sidebar/WBMacOSSidebarViewModel.swift,
+				macOS/Managers/WBMacOSAnswerSessionManager.swift,
+				macOS/Managers/WBMacOSMeetingDetailManager.swift,
+				macOS/Managers/WBMacOSSelectionManager.swift,
+				macOS/Models/WBMacOSActionItem.swift,
+				macOS/Models/WBMacOSAnswer.swift,
+				macOS/Models/WBMacOSAttendee.swift,
+				macOS/Models/WBMacOSLoadState.swift,
+				macOS/Models/WBMacOSMeetingDetail.swift,
+				macOS/Models/WBMacOSRelatedMeeting.swift,
+				macOS/Models/WBMacOSScheduleEvent.swift,
+				macOS/Models/WBMacOSScheduleScope.swift,
+				macOS/Models/WBMacOSWhiteboard.swift,
+				macOS/Services/WBMacOSActionItemsProvider.swift,
+				macOS/Services/WBMacOSAgentAnswerProvider.swift,
+				macOS/Services/WBMacOSAttendeeImageProvider.swift,
+				macOS/Services/WBMacOSEventWhiteboardsProvider.swift,
+				macOS/Services/WBMacOSICloudWhiteboardImageProvider.swift,
+				macOS/Services/WBMacOSMeetingDetailProvider.swift,
+				macOS/Services/WBMacOSMeetingWhiteboardsProvider.swift,
+				macOS/Services/WBMacOSScheduleEventsProvider.swift,
+				macOS/Services/WBMacOSWhiteboardRecordAdapter.swift,
+				"macOS/Utilities/CGFloat+Tokens.swift",
+				macOS/Utilities/WBMacOSPoll.swift,
+				macOS/ViewModifiers/HoverOpacityModifier.swift,
+				macOS/ViewModifiers/OnHoverViewModifier.swift,
+				macOS/WBMacOSRootView.swift,
+				macOS/WBMacOSRootViewModel.swift,
+				macOS/WhiteboardMacApp.swift,
+			);
+			target = 444FC7503013D9F6002D3D57 /* WhiteboardApp */;
+		};
+		444FC78030140158002D3D57 /* Exceptions for "WhiteboardApp" folder in "WhiteboardMac" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				macOS/Assets.xcassets,
+				macOS/Features/Components/AttendeeChip/WBMacOSAttendeeChipView.swift,
+				macOS/Features/Components/AttendeeChip/WBMacOSAttendeeChipViewModel.swift,
+				"macOS/Features/Components/Date+WBMacOS.swift",
+				macOS/Features/Components/ImageView/WBMacOSWhiteboardImageView.swift,
+				macOS/Features/Components/ImageView/WBMacOSWhiteboardImageViewModel.swift,
+				macOS/Features/Components/WBMacOSMeetingCardView.swift,
+				macOS/Features/Detail/WBMacOSActionItemPromptView.swift,
+				macOS/Features/Detail/WBMacOSActionItemsSectionView.swift,
+				macOS/Features/Detail/WBMacOSActionItemsSectionViewModel.swift,
+				macOS/Features/Detail/WBMacOSWhiteboardDetailView.swift,
+				macOS/Features/Detail/WBMacOSWhiteboardDetailViewModel.swift,
+				macOS/Features/Home/WBMacOSHomeView.swift,
+				macOS/Features/Home/WBMacOSHomeViewModel.swift,
+				macOS/Features/Schedule/WBMacOSScheduleView.swift,
+				macOS/Features/Schedule/WBMacOSScheduleViewModel.swift,
+				macOS/Features/Settings/WBMacOSSettingsView.swift,
+				macOS/Features/Settings/WBMacOSSettingsViewModel.swift,
+				macOS/Features/Sidebar/WBMacOSSidebarItem.swift,
+				macOS/Features/Sidebar/WBMacOSSidebarView.swift,
+				macOS/Features/Sidebar/WBMacOSSidebarViewModel.swift,
+				macOS/Managers/WBMacOSAnswerSessionManager.swift,
+				macOS/Managers/WBMacOSMeetingDetailManager.swift,
+				macOS/Managers/WBMacOSSelectionManager.swift,
+				macOS/Models/WBMacOSActionItem.swift,
+				macOS/Models/WBMacOSAnswer.swift,
+				macOS/Models/WBMacOSAttendee.swift,
+				macOS/Models/WBMacOSLoadState.swift,
+				macOS/Models/WBMacOSMeetingDetail.swift,
+				macOS/Models/WBMacOSRelatedMeeting.swift,
+				macOS/Models/WBMacOSScheduleEvent.swift,
+				macOS/Models/WBMacOSScheduleScope.swift,
+				macOS/Models/WBMacOSWhiteboard.swift,
+				macOS/Services/WBMacOSActionItemsProvider.swift,
+				macOS/Services/WBMacOSAgentAnswerProvider.swift,
+				macOS/Services/WBMacOSAttendeeImageProvider.swift,
+				macOS/Services/WBMacOSEventWhiteboardsProvider.swift,
+				macOS/Services/WBMacOSICloudWhiteboardImageProvider.swift,
+				macOS/Services/WBMacOSMeetingDetailProvider.swift,
+				macOS/Services/WBMacOSMeetingWhiteboardsProvider.swift,
+				macOS/Services/WBMacOSScheduleEventsProvider.swift,
+				macOS/Services/WBMacOSWhiteboardRecordAdapter.swift,
+				"macOS/Utilities/CGFloat+Tokens.swift",
+				macOS/Utilities/WBMacOSPoll.swift,
+				macOS/ViewModifiers/HoverOpacityModifier.swift,
+				macOS/ViewModifiers/OnHoverViewModifier.swift,
+				macOS/WBMacOSRootView.swift,
+				macOS/WBMacOSRootViewModel.swift,
+				macOS/WhiteboardMacApp.swift,
+			);
+			target = 444FC7623014000B002D3D57 /* WhiteboardMac */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		444FC7793014012E002D3D57 /* WhiteboardApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				444FC77F30140158002D3D57 /* Exceptions for "WhiteboardApp" folder in "WhiteboardApp" target */,
+				444FC78030140158002D3D57 /* Exceptions for "WhiteboardApp" folder in "WhiteboardMac" target */,
+			);
+			path = WhiteboardApp;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		444FC74E3013D9F6002D3D57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19538D0C30180E9700125DCD /* RailtracksSwift in Frameworks */,
+				19538F0130180F0100125DCD /* RailtownLogger in Frameworks */,
+				444FC7883014049F002D3D57 /* WhiteboardCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		444FC7603014000B002D3D57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19538D0E30180EAC00125DCD /* RailtracksSwift in Frameworks */,
+				19538F0330180F0300125DCD /* RailtownLogger in Frameworks */,
+				444FC786301402B3002D3D57 /* WhiteboardCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		444FC7483013D9F6002D3D57 = {
+			isa = PBXGroup;
+			children = (
+				444FC7793014012E002D3D57 /* WhiteboardApp */,
+				444FC784301402B3002D3D57 /* Frameworks */,
+				444FC7523013D9F6002D3D57 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		444FC7523013D9F6002D3D57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				444FC7513013D9F6002D3D57 /* WhiteboardApp.app */,
+				444FC7633014000B002D3D57 /* WhiteboardMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		444FC784301402B3002D3D57 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		444FC7503013D9F6002D3D57 /* WhiteboardApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 444FC75C3013D9F7002D3D57 /* Build configuration list for PBXNativeTarget "WhiteboardApp" */;
+			buildPhases = (
+				444FC74D3013D9F6002D3D57 /* Sources */,
+				444FC74E3013D9F6002D3D57 /* Frameworks */,
+				444FC74F3013D9F6002D3D57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				444FC7793014012E002D3D57 /* WhiteboardApp */,
+			);
+			name = WhiteboardApp;
+			packageProductDependencies = (
+				444FC7873014049F002D3D57 /* WhiteboardCore */,
+				19538D0B30180E9700125DCD /* RailtracksSwift */,
+				19538F0230180F0200125DCD /* RailtownLogger */,
+			);
+			productName = WhiteboardApp;
+			productReference = 444FC7513013D9F6002D3D57 /* WhiteboardApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		444FC7623014000B002D3D57 /* WhiteboardMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 444FC76B3014000C002D3D57 /* Build configuration list for PBXNativeTarget "WhiteboardMac" */;
+			buildPhases = (
+				444FC75F3014000B002D3D57 /* Sources */,
+				444FC7603014000B002D3D57 /* Frameworks */,
+				444FC7613014000B002D3D57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhiteboardMac;
+			packageProductDependencies = (
+				444FC785301402B3002D3D57 /* WhiteboardCore */,
+				19538D0D30180EAC00125DCD /* RailtracksSwift */,
+				19538F0430180F0400125DCD /* RailtownLogger */,
+			);
+			productName = WhiteboardMac;
+			productReference = 444FC7633014000B002D3D57 /* WhiteboardMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		444FC7493013D9F6002D3D57 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					444FC7503013D9F6002D3D57 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					444FC7623014000B002D3D57 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+				};
+			};
+			buildConfigurationList = 444FC74C3013D9F6002D3D57 /* Build configuration list for PBXProject "WhiteboardApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 444FC7483013D9F6002D3D57;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				444FC781301401EB002D3D57 /* XCLocalSwiftPackageReference "Packages/WhiteboardCore" */,
+				19538D0A30180E9700125DCD /* XCRemoteSwiftPackageReference "Railtracks-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 444FC7523013D9F6002D3D57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				444FC7503013D9F6002D3D57 /* WhiteboardApp */,
+				444FC7623014000B002D3D57 /* WhiteboardMac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		444FC74F3013D9F6002D3D57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		444FC7613014000B002D3D57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		444FC74D3013D9F6002D3D57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		444FC75F3014000B002D3D57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		444FC75A3013D9F7002D3D57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		444FC75B3013D9F7002D3D57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		444FC75D3013D9F7002D3D57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhiteboardApp/iOS/WhiteboardApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WhiteboardApp/Info.plist;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "WhiteboardApp links whiteboard photos to your meetings, so it needs to read your calendar events.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "WhiteboardApp uses the camera to photograph whiteboards during your meetings.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "WhiteboardApp shows meeting attendees with their contact photos, so it looks attendees up in your contacts.";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Railtown.WhiteboardApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		444FC75E3013D9F7002D3D57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhiteboardApp/iOS/WhiteboardApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WhiteboardApp/Info.plist;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "WhiteboardApp links whiteboard photos to your meetings, so it needs to read your calendar events.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "WhiteboardApp uses the camera to photograph whiteboards during your meetings.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "WhiteboardApp shows meeting attendees with their contact photos, so it looks attendees up in your contacts.";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Railtown.WhiteboardApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
+		444FC76C3014000C002D3D57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhiteboardApp/macOS/WhiteboardMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "WhiteboardApp links whiteboard photos to your meetings, so it needs to read your calendar events.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "WhiteboardApp shows meeting attendees with their contact photos, so it looks attendees up in your contacts.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Railtown.WhiteboardMacApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		444FC76D3014000C002D3D57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhiteboardApp/macOS/WhiteboardMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "WhiteboardApp links whiteboard photos to your meetings, so it needs to read your calendar events.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "WhiteboardApp shows meeting attendees with their contact photos, so it looks attendees up in your contacts.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Railtown.WhiteboardMacApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		444FC74C3013D9F6002D3D57 /* Build configuration list for PBXProject "WhiteboardApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				444FC75A3013D9F7002D3D57 /* Debug */,
+				444FC75B3013D9F7002D3D57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		444FC75C3013D9F7002D3D57 /* Build configuration list for PBXNativeTarget "WhiteboardApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				444FC75D3013D9F7002D3D57 /* Debug */,
+				444FC75E3013D9F7002D3D57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		444FC76B3014000C002D3D57 /* Build configuration list for PBXNativeTarget "WhiteboardMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				444FC76C3014000C002D3D57 /* Debug */,
+				444FC76D3014000C002D3D57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		444FC781301401EB002D3D57 /* XCLocalSwiftPackageReference "Packages/WhiteboardCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/WhiteboardCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		19538D0A30180E9700125DCD /* XCRemoteSwiftPackageReference "Railtracks-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RailtownAI/Railtracks-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.15;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		19538D0B30180E9700125DCD /* RailtracksSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19538D0A30180E9700125DCD /* XCRemoteSwiftPackageReference "Railtracks-swift" */;
+			productName = RailtracksSwift;
+		};
+		19538D0D30180EAC00125DCD /* RailtracksSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19538D0A30180E9700125DCD /* XCRemoteSwiftPackageReference "Railtracks-swift" */;
+			productName = RailtracksSwift;
+		};
+		19538F0230180F0200125DCD /* RailtownLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RailtownLogger;
+		};
+		19538F0430180F0400125DCD /* RailtownLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RailtownLogger;
+		};
+		444FC785301402B3002D3D57 /* WhiteboardCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 444FC781301401EB002D3D57 /* XCLocalSwiftPackageReference "Packages/WhiteboardCore" */;
+			productName = WhiteboardCore;
+		};
+		444FC7873014049F002D3D57 /* WhiteboardCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 444FC781301401EB002D3D57 /* XCLocalSwiftPackageReference "Packages/WhiteboardCore" */;
+			productName = WhiteboardCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 444FC7493013D9F6002D3D57 /* Project object */;
+}
