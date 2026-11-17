@@ -72,7 +72,7 @@ final class WBiOSSaveResultViewModel {
                 startEpoch: meeting.startEpoch
             )
         do {
-            try await saveService.save(
+            let record = try await saveService.save(
                 imageData: data,
                 id: ids.id,
                 imageID: ids.imageID,
@@ -86,6 +86,13 @@ final class WBiOSSaveResultViewModel {
                 capturedByDevice: UIDevice.current.name
             )
             state = .saved
+
+            // Spotlight (and Siri, through it) learns about the whiteboard from the record just
+            // ingested, not a read-back: ingest is queued, so a fetch now could miss it.
+            let meetingTitle = meeting.title
+            Task {
+                await WBWhiteboardSpotlight.index(record, meetingTitle: meetingTitle)
+            }
 
             if runSaveDiagnostics {
                 // Affirmation: after a successful ingest, re-query the whiteboard engine three ways —

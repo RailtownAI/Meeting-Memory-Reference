@@ -84,11 +84,16 @@ final class WBiOSMeetingViewModel {
 
         // `requestFullAccess` prompts only when access is undetermined; otherwise it returns the
         // existing grant without re-prompting — so calling it unconditionally is safe on refresh.
+        let couldPrompt = eventService.canRequestAccess
         let hasAccess = (try? await eventService.requestFullAccess()) ?? false
         WBLog.info("🔄🏠 load[\(source)] hasAccess=\(hasAccess)")
         guard hasAccess else {
             state = .accessDenied
             return
+        }
+        if couldPrompt {
+            // Just granted: Siri can now learn the meeting names for the Remember phrases.
+            WBiOSShortcutVocabulary.refresh(reason: "calendar access granted")
         }
 
         do {

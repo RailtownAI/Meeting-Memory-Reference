@@ -40,6 +40,11 @@ public struct WBWhiteboardSaveService: Sendable {
     /// Uploads the photo (unless iCloud already holds it) and ingests the record. `id`/`imageID` come
     /// from `makeIDs()`, minted once per capture so a retry after a failed ingest reuses them and
     /// doesn't re-upload the photo.
+    ///
+    /// Returns the record as ingested. Ingest is queued (`202 Accepted`), so a read right after this
+    /// can miss the record; callers that need it straight away (Spotlight, App Intents) use this
+    /// value instead of fetching it back.
+    @discardableResult
     public func save(
         imageData: Data,
         id: String,
@@ -52,7 +57,7 @@ public struct WBWhiteboardSaveService: Sendable {
         eventUID: String,
         occurrenceStart: Date,
         capturedByDevice: String
-    ) async throws {
+    ) async throws -> WBWhiteboardRecord {
         // Skip the upload when the photo is already in iCloud — this is what lets a retry after a
         // failed ingest re-ingest without re-uploading (the ids are stable across a capture's retries).
         let iCloudHasPhoto = (try? WBFileStore.photoExists(imageID: imageID)) ?? false
@@ -80,6 +85,7 @@ public struct WBWhiteboardSaveService: Sendable {
         WBLog.debug("📤 Starting ingest for \(id)")
         try await ingestion.upsert(record)
         WBLog.debug("📤 Ingest complete for \(id)")
+        return record
     }
 }
 

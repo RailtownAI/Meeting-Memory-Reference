@@ -5,6 +5,7 @@
 //  Created by Mark Su on 2026-07-24.
 //
 
+import AppIntents
 import SwiftUI
 import WhiteboardCore
 
@@ -17,6 +18,7 @@ struct WhiteboardMacApp: App {
     init() {
         WBLog.setup()
         Self.configureConductrUploads()
+        Self.registerIntentDependencies()
         let selectionManager = WBMacOSSelectionManager()
         self.selectionManager = selectionManager
         sessionManager = WBMacOSAnswerSessionManager(
@@ -27,6 +29,11 @@ struct WhiteboardMacApp: App {
             meetingDetailProvider: WBMacOSEventKitMeetingDetailProvider(),
             meetingWhiteboardsProvider: WBMacOSMeetingWhiteboardsProvider()
         )
+        // Captures come from the iPhone; indexing them here puts them in this Mac's Spotlight and
+        // Siri.
+        Task {
+            await WBWhiteboardSpotlight.syncLatest()
+        }
     }
 
     /// Hands the stored Conductr key to both uploaders — agent-run traces and error logs —
@@ -40,6 +47,14 @@ struct WhiteboardMacApp: App {
             return
         }
         WBRailtownLoggerSetup.configure(apiKey: apiKey)
+    }
+
+    /// The services the Siri and Shortcuts actions reach through `@Dependency`. `static` because it
+    /// runs before the stored managers are initialized.
+    private static func registerIntentDependencies() {
+        AppDependencyManager.shared.add(dependency: WBPromptSearchService())
+        AppDependencyManager.shared.add(dependency: WBWhiteboardRecordStore())
+        AppDependencyManager.shared.add(dependency: WBEventKitService())
     }
 
     var body: some Scene {

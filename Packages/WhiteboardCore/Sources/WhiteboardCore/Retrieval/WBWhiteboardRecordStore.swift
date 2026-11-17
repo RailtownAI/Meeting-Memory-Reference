@@ -30,6 +30,18 @@ public struct WBWhiteboardRecordStore: Sendable {
         public let totalPages: Int
     }
 
+    /// One record with the engine's version number for it (see `versionedRecord(id:)`).
+    public struct VersionedRecord: Sendable {
+        public let record: WBWhiteboardRecord
+        public let version: Int
+    }
+
+    /// One page of versioned records plus the total page count reported by the engine.
+    public struct VersionedPage: Sendable {
+        public let items: [VersionedRecord]
+        public let totalPages: Int
+    }
+
     public init() {}
 
     /// Semantic search over the whiteboard vector store, most-relevant first.
@@ -124,6 +136,27 @@ public struct WBWhiteboardRecordStore: Sendable {
             options: StorageQueryOptions(pageNumber: pageNumber, pageSize: pageSize)
         )
         return Page(items: page.items, totalPages: page.totalPages)
+    }
+
+    /// One page of all stored whiteboard records, each with its version. Reads the envelope form,
+    /// because the version is not in the record itself. A document whose content is not a
+    /// whiteboard record is skipped, as `list` skips it.
+    public func listVersioned(
+        pageNumber: Int = 1,
+        pageSize: Int = 100
+    ) async throws -> VersionedPage {
+        let page: EngineDocumentPage = try await makeClient().listStorageDocuments(
+            options: StorageQueryOptions(pageNumber: pageNumber, pageSize: pageSize)
+        )
+        let decoder = JSONDecoder()
+        let items = page.items.compactMap { document -> VersionedRecord? in
+            let content = Data(document.content.utf8)
+            guard let record = try? decoder.decode(WBWhiteboardRecord.self, from: content) else {
+                return nil
+            }
+            return VersionedRecord(record: record, version: document.version)
+        }
+        return VersionedPage(items: items, totalPages: page.totalPages)
     }
 
     /// Deletes every whiteboard record in the engine, returning the number removed.
