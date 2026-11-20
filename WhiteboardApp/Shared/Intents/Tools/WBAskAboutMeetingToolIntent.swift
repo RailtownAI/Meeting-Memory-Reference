@@ -9,6 +9,9 @@
 
 import AppIntents
 import Foundation
+import ImageIO
+import SwiftUI
+import UniformTypeIdentifiers
 import WhiteboardCore
 
 @available(iOS 27.3, macOS 27.3, *)
@@ -16,7 +19,7 @@ import WhiteboardCore
 struct WBAskAboutMeetingToolIntent: AppIntent {
     static let title: LocalizedStringResource = "Ask About a Meeting"
     static let description = IntentDescription(
-        "Prepares the user for a calendar meeting, or answers a question about it, from the whiteboards captured in earlier occurrences of that meeting. Returns plain text: the meeting, then each whiteboard with its meeting date in full, its summary, and its action items as sentences."
+        "Prepares the user for a calendar meeting, or answers a question about it, from the whiteboards captured in earlier occurrences of that meeting. Returns a briefing: its text names the meeting, then each whiteboard with its meeting date in full, its summary, and its action items as sentences; its photo is the newest whiteboard, when it can be loaded."
     )
 
     @Parameter(
@@ -40,21 +43,52 @@ struct WBAskAboutMeetingToolIntent: AppIntent {
     @Dependency private var recordStore: WBWhiteboardRecordStore
     @Dependency private var eventService: WBEventKitService
 
-    func perform() async throws -> some IntentResult & ReturnsValue<String> & ProvidesDialog & ShowsSnippetView {
-        WBIntentReply.result(
-            await Self.answer(
-                meetingTitle: meetingTitle,
-                meetingStart: meetingStart,
-                question: question,
-                eventService: eventService,
-                recordStore: recordStore
-            )
+    func perform() async throws -> some IntentResult & ReturnsValue<WBMeetingBriefingEntity> & ProvidesDialog & ShowsSnippetView {
+        let clock = ContinuousClock()
+        let start = clock.now
+        let reply = await Self.answer(
+            meetingTitle: meetingTitle,
+            meetingStart: meetingStart,
+            question: question,
+            eventService: eventService,
+            recordStore: recordStore
+        )
+        // The photo gets what is left of the deadline, at most `photoSeconds`; without it, the
+        // briefing is still answered as text.
+        let elapsed = clock.now - start
+        let remaining = WBIntentReply.waitSeconds - elapsed / .seconds(1)
+        let photo = await Self.photo(
+            imageID: reply.firstImageID,
+            seconds: min(Self.photoSeconds, remaining)
+        )
+        // `@Property` wrappers are reference-backed, so a `let` entity can still be filled in.
+        let briefing = WBMeetingBriefingEntity()
+        briefing.text = reply.text
+        briefing.photo = photo.map { photo in
+            IntentFile(data: photo.jpeg, filename: "whiteboard.jpg", type: .jpeg)
+        }
+        return .result(
+            value: briefing,
+            dialog: IntentDialog(stringLiteral: reply.text),
+            view: WBMeetingBriefingView(text: reply.text, image: photo?.image)
         )
     }
 
+    /// What `answer` produced: the reply text, and the image id of its first (newest) whiteboard
+    /// when there is one.
+    nonisolated struct Reply: Sendable {
+        let text: String
+        let firstImageID: String?
+
+        init(_ text: String, firstImageID: String? = nil) {
+            self.text = text
+            self.firstImageID = firstImageID
+        }
+    }
+
     /// The reply as one plain string: the question (if any), the meeting, then up to
-    /// `maximumWhiteboards` of its whiteboards, newest first. Never throws; failures become a
-    /// sentence that says what to do.
+    /// `maximumWhiteboards` of its whiteboards, newest first, with the first whiteboard's image
+    /// id. Never throws; failures become a sentence that says what to do.
     ///
     /// Static, so it can run without the system's intent runner.
     static func answer(
@@ -64,7 +98,7 @@ struct WBAskAboutMeetingToolIntent: AppIntent {
         eventService: WBEventKitService,
         recordStore: WBWhiteboardRecordStore,
         now: Date = Date()
-    ) async -> String {
+    ) async -> Reply {
         let title = meetingTitle.flatMap(Self.nonEmpty)
         let question = question.flatMap(Self.nonEmpty)
         // Shows what Siri passed in, e.g. the title and start it read from an event on screen.
@@ -76,7 +110,7 @@ struct WBAskAboutMeetingToolIntent: AppIntent {
         // Never prompts: Siri runs this in the background, where a prompt can't be answered.
         guard eventService.hasFullAccess else {
             WBLog.info("🗣️ Meeting tool has no full calendar access; answered without a lookup")
-            return "Open Meeting Memory once and allow Calendar access, then ask again."
+            return Reply("Open Meeting Memory once and allow Calendar access, then ask again.")
         }
         do {
             return try await withDeadline(seconds: WBIntentReply.waitSeconds) {
@@ -89,7 +123,7 @@ struct WBAskAboutMeetingToolIntent: AppIntent {
                 let path = resolution.path
                 guard let event = resolution.event else {
                     WBLog.info("🗣️ Meeting tool found no event (looked up by \(path))")
-                    return notFound(title: title, start: meetingStart)
+                    return Reply(notFound(title: title, start: meetingStart))
                 }
                 let occurrences = try await whiteboards(
                     of: event,
@@ -101,13 +135,19 @@ struct WBAskAboutMeetingToolIntent: AppIntent {
                 WBLog.info(
                     "🗣️ Meeting tool found \(eventText) by \(path): \(whiteboardCount) whiteboard(s) in \(occurrences.count) occurrence(s)"
                 )
-                return text(event: event, question: question, occurrences: occurrences)
+                // The text lists whiteboards in this same order, so this is its first one.
+                let firstImageID = occurrences.first?.records.first?.imageId
+                return Reply(
+                    text(event: event, question: question, occurrences: occurrences),
+                    firstImageID: firstImageID
+                )
             }
         } catch is WBDeadlineExceeded {
             WBLog.warning("⚠️🗣️ Meeting tool passed its \(WBIntentReply.waitSeconds)s deadline")
-            return "Meeting Memory is taking longer than usual to load that meeting's whiteboards. Ask again in a moment."
+            return Reply("Meeting Memory is taking longer than usual to load that meeting's whiteboards. Ask again in a moment.")
         } catch {
-            return WBIntentReply.message(for: error, action: "load that meeting's whiteboards")
+            let message = WBIntentReply.message(for: error, action: "load that meeting's whiteboards")
+            return Reply(message)
         }
     }
 }
@@ -341,5 +381,125 @@ extension WBAskAboutMeetingToolIntent {
     static nonisolated func nonEmpty(_ text: String) -> String? {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
+    }
+}
+
+// MARK: - The first whiteboard's photo
+
+@available(iOS 27.3, macOS 27.3, *)
+extension WBAskAboutMeetingToolIntent {
+    /// The longest the photo is waited for. A photo that iCloud has not downloaded to this device
+    /// yet can take longer than the whole deadline, so the briefing goes without it instead.
+    static nonisolated let photoSeconds: Double = 8
+
+    /// Longest side of the photo in the reply: enough to read the board on a card, small enough to
+    /// hand to Siri and to other actions.
+    static nonisolated let photoMaxPixelSize = 1024
+
+    /// The photo of `imageID` from iCloud Drive, as a small JPEG and the image the snippet
+    /// draws, or `nil` when there is no image id, less than a second is left, or it can't be
+    /// loaded in `seconds`. Never throws: the briefing is answered without the photo.
+    static func photo(imageID: String?, seconds: Double) async -> (jpeg: Data, image: CGImage)? {
+        guard let imageID, seconds >= 1 else {
+            return nil
+        }
+        do {
+            let data = try await withDeadline(seconds: seconds) {
+                try await WBFileStore.photoData(forImageID: imageID)
+            }
+            guard let data, let image = thumbnail(of: data), let jpeg = jpegData(of: image) else {
+                WBLog.warning("⚠️🗣️ Meeting tool has no readable photo for \(imageID)")
+                return nil
+            }
+            WBLog.info("🗣️ Meeting tool loaded photo \(imageID), \(jpeg.count) bytes")
+            return (jpeg, image)
+        } catch {
+            let description = "\(error)"
+            WBLog.warning("⚠️🗣️ Meeting tool could not load photo \(imageID): \(description)")
+            return nil
+        }
+    }
+
+    /// `data` as an upright image no larger than `photoMaxPixelSize` on its longest side.
+    static nonisolated func thumbnail(of data: Data) -> CGImage? {
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
+            return nil
+        }
+        let options = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: photoMaxPixelSize,
+        ] as CFDictionary
+        return CGImageSourceCreateThumbnailAtIndex(source, 0, options)
+    }
+
+    /// `image` encoded as JPEG.
+    static nonisolated func jpegData(of image: CGImage) -> Data? {
+        let data = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(
+            data as CFMutableData,
+            UTType.jpeg.identifier as CFString,
+            1,
+            nil
+        ) else {
+            return nil
+        }
+        let options = [kCGImageDestinationLossyCompressionQuality: 0.8] as CFDictionary
+        CGImageDestinationAddImage(destination, image, options)
+        guard CGImageDestinationFinalize(destination) else {
+            return nil
+        }
+        return data as Data
+    }
+}
+
+// MARK: - The result
+
+/// What Ask About a Meeting returns: the briefing text, and the newest whiteboard's photo when it
+/// could be loaded. The text is also the dialog; the photo is also drawn in the snippet.
+@available(iOS 27.3, macOS 27.3, *)
+struct WBMeetingBriefingEntity: TransientAppEntity {
+    static let typeDisplayRepresentation = TypeDisplayRepresentation(name: "Meeting Briefing")
+
+    @Property(
+        title: "Text",
+        description: "The briefing: the meeting, then each whiteboard with its meeting date in full, its summary and its action items."
+    )
+    var text: String
+
+    @Property(
+        title: "Whiteboard Photo",
+        description: "A photo of the newest whiteboard from the meeting, as JPEG. Empty when it could not be loaded."
+    )
+    var photo: IntentFile?
+
+    var displayRepresentation: DisplayRepresentation {
+        DisplayRepresentation(title: "Meeting Briefing")
+    }
+
+    init() {
+        text = ""
+        photo = nil
+    }
+}
+
+/// The snippet: the newest whiteboard's photo, when there is one, above the briefing text.
+struct WBMeetingBriefingView: View {
+    let text: String
+    let image: CGImage?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if let image {
+                Image(decorative: image, scale: 1)
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+            Text(text)
+                .font(.callout)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
     }
 }
